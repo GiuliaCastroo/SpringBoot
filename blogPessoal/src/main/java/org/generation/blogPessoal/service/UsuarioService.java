@@ -18,14 +18,14 @@ public class UsuarioService {
 	private UsuarioRepository repository;
 	
 	
-	public Usuario CadastrarUsuario (Usuario usuario) {
+	public Optional<Usuario> CadastrarUsuario (Usuario usuario) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();       //Encryptação da senha?
 		
 		String senhaEconder = encoder.encode(usuario.getSenha());
 		usuario.setSenha(senhaEconder);
 		
-		return repository.save(usuario);
-	
+		return Optional.empty();
+		
 	}
 	
                	public Optional<UserLogin> Logar (Optional <UserLogin> user) {

@@ -25,9 +25,18 @@ public class Usuario {                 // criadno a nossa classe primária
 	private String usuario;
 
 	@NotNull(message = "A senha é obrigatória.")
-	@Size(min = 5, max = 16, message = "A sua senha deve conter no mínimo 5 e no máximo 16 caracteres!!")
+	@Size(min = 5, max = 255, message = "A sua senha deve conter no mínimo 5 e no máximo 16 caracteres!!")
 	private String senha;
 
+	public Usuario(long id, String nome, String usuario, String senha) {
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+	}
+	
+		public Usuario() { }		
+	
 	// Get and set//
 
 	public long getId() {
