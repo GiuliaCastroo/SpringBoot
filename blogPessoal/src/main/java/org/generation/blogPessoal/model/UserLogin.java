@@ -1,12 +1,24 @@
 package org.generation.blogPessoal.model;
 
-public class UserLogin {                     //Seria uma model para controlar o token?
-		
-	private String nome;  
-	
+public class UserLogin { // Seria uma model para controlar o token?
+
+	private long id;
+
+	private String nome;
+
 	private String usuario;
-	
+
 	private String senha;
+
+	private String token;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
@@ -39,7 +51,5 @@ public class UserLogin {                     //Seria uma model para controlar o 
 	public void setToken(String token) {
 		this.token = token;
 	}
-
-	private String token;
 
 }

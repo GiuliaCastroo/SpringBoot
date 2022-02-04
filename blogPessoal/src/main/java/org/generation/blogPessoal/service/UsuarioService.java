@@ -1,6 +1,7 @@
 package org.generation.blogPessoal.service;
 
 import java.nio.charset.Charset;
+
 import java.util.Optional;
 
 import org.apache.commons.codec.binary.Base64; //precisa digitar manualmente referente ao cammons-codec
@@ -20,7 +21,6 @@ public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
 
 	public Optional<Usuario> CadastrarUsuario(Usuario usuario) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); // Encryptação da senha?
 
 		if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())
 			return Optional.empty();
@@ -53,13 +53,13 @@ public class UsuarioService {
 		Optional<Usuario> usuario = usuarioRepository.findByUsuario(usuarioLogin.get().getUsuario());
 		if (usuario.isPresent()) {
 			if (compararSenhas(usuarioLogin.get().getSenha(), usuario.get().getSenha())) {
-				String token = gerarBasicToken(usuarioLogin.get().getUsuario(), usuarioLogin.get().getSenha());
+				usuarioLogin.get().setId(usuario.get().getId());
 				usuarioLogin.get().setNome(usuario.get().getNome());
 				usuarioLogin.get().setSenha(usuario.get().getSenha());
-				usuarioLogin.get().setToken(token);
-
+				usuarioLogin.get()
+				.setToken(gerarBasicToken(usuarioLogin.get().getUsuario(), usuarioLogin.get().getSenha()));
+				usuarioLogin.get().setSenha(usuario.get().getSenha());
 				return usuarioLogin;
-
 			}
 		}
 
@@ -80,7 +80,7 @@ public class UsuarioService {
 
 	}
 
-	String gerarBasicToken(String usuario, String senha) {
+		private String gerarBasicToken(String usuario, String senha) {
 
 		String token = usuario + ":" + senha;
 		byte[] tokenBase64 = Base64.encodeBase64(token.getBytes(Charset.forName("US-ASCII")));
