@@ -25,7 +25,7 @@ public class Usuario {                 // criadno a nossa classe primária
 	private String usuario;
 
 	@NotNull(message = "A senha é obrigatória.")
-	@Size(min = 5, max = 255, message = "A sua senha deve conter no mínimo 5 e no máximo 16 caracteres!!")
+	@Size(min = 5, max = 255, message = "A sua senha deve conter no mínimo 5 e no máximo 255 caracteres!!")
 	private String senha;
 
 	public Usuario(long id, String nome, String usuario, String senha) {
